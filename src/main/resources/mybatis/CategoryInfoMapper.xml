@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.ln.dao.CategoryInfoMapper">
+  <resultMap id="BaseResultMap" type="com.blog.ln.bean.CategoryInfo">
+    <id column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+    <result column="category_alias" jdbcType="VARCHAR" property="categoryAlias" />
+    <result column="category_desc" jdbcType="VARCHAR" property="categoryDesc" />
+     <result column="number"  property="number" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    category_id, category_name, category_alias, category_desc
+  </sql>
+  
+  <select id="getCateList" resultMap="BaseResultMap">
+  	select  a.*,b.number from  category_info a left join 
+	(select  category_id,count(article_id) number  from article_info  group by category_id) b 
+	on a.category_id = b.category_id
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from category_info
+    where category_id = #{categoryId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from category_info
+    where category_id = #{categoryId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.blog.ln.bean.CategoryInfo">
+    insert into category_info (category_id, category_name, category_alias, 
+      category_desc)
+    values (#{categoryId,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR}, #{categoryAlias,jdbcType=VARCHAR}, 
+      #{categoryDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.blog.ln.bean.CategoryInfo">
+    insert into category_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="categoryName != null">
+        category_name,
+      </if>
+      <if test="categoryAlias != null">
+        category_alias,
+      </if>
+      <if test="categoryDesc != null">
+        category_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryName != null">
+        #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryAlias != null">
+        #{categoryAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryDesc != null">
+        #{categoryDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.blog.ln.bean.CategoryInfo">
+    update category_info
+    <set>
+      <if test="categoryName != null">
+        category_name = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryAlias != null">
+        category_alias = #{categoryAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryDesc != null">
+        category_desc = #{categoryDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where category_id = #{categoryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.blog.ln.bean.CategoryInfo">
+    update category_info
+    set category_name = #{categoryName,jdbcType=VARCHAR},
+      category_alias = #{categoryAlias,jdbcType=VARCHAR},
+      category_desc = #{categoryDesc,jdbcType=VARCHAR}
+    where category_id = #{categoryId,jdbcType=INTEGER}
+  </update>
+</mapper>

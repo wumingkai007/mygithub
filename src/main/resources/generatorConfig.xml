@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!-- 配置数据库驱动 -->
+	<classPathEntry location="D:\mysql-connector-java-5.1.43.jar" />
+	<context id="MySQLTables" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<!-- 是否去掉注释 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<!-- 数据库链接URL、用户名、密码  -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/myblog?characterEncoding=utf8"
+			userId="root" password="123456">
+			<!--<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@localhost:1521:orcl" 
+				userId="msa" password="msa"> -->
+		</jdbcConnection>
+		
+		<!--&lt;!&ndash; 生成模型的包名和位置 &ndash;&gt;
+		<javaModelGenerator targetPackage="com.blog.ln.bean"
+			targetProject="D:\Users\eclipse-workspace201801\myblog\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		
+		&lt;!&ndash; 生成的映射文件包名和位置 &ndash;&gt;
+		<sqlMapGenerator targetPackage="mybatis"
+			targetProject="D:\Users\eclipse-workspace201801\myblog\src\main\resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		
+		&lt;!&ndash; 生成DAO的包名和位置 &ndash;&gt;
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.blog.ln.dao" targetProject="D:\Users\eclipse-workspace201801\myblog\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		
+		&lt;!&ndash; table 要生成那些表(更改tableName和domainObjectName就可以) &ndash;&gt;
+		<table tableName="user_info" domainObjectName="UserInfo"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" />
+
+		<table tableName="category_info" domainObjectName="CategoryInfo"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" />
+	
+		<table tableName="article_info" domainObjectName="ArticleInfo"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" />
+			
+		<table tableName="message_info" domainObjectName="MessageInfo"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" />-->
+		
+	</context>
+
+</generatorConfiguration>
