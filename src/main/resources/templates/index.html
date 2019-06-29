@@ -36,7 +36,12 @@
        	<#list (artlist)! as art >
         <li>
           <h3 class="blogtitle"><a href="/listview/${(art.articleId)!}" target="_blank" >${(art.articleTitle)!}</a></h3>
-          <div class="bloginfo"><span class="blogpic"><a href="/listview/${(art.articleId)!}" title="${(art.articleTitle)!}"><img src="${(art.articleImg)!}" alt="${(art.articleTitle)!}" /></a></span>
+          <div class="bloginfo">
+            <a href="/listview/${(art.articleId)!}" title="${(art.articleTitle)!}"></a>
+            <!--<span class="blogpic">
+            <a href="/listview/${(art.articleId)!}" title="${(art.articleTitle)!}">
+              &lt;!&ndash;<img src="${(art.articleImg)!}" alt="${(art.articleTitle)!}" />&ndash;&gt;</a>
+           </span>-->
             <p>
             <#if art.articleContent?length gt 130>
           		  ${art.articleContent?substring(0,130)} ...
@@ -94,3 +99,5 @@
 </footer>
 </body>
 </html>
+<script type="text/javascript">
+</script>

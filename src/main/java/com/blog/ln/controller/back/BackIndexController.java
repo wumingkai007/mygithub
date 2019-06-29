@@ -1,11 +1,13 @@
 package com.blog.ln.controller.back;
 
+import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.blog.ln.utils.IpConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,10 @@ import com.blog.ln.service.UserInfoService;
 @Controller
 @RequestMapping("/back/")
 public class BackIndexController {
+
+	@Autowired
+	IpConfiguration ip;
+
 
 	/**
 	 * 用户管理的业务逻辑接口
@@ -58,10 +64,16 @@ public class BackIndexController {
 	 * @return
 	 */
 	@RequestMapping("userlogin")
-	public String userlogin(UserInfo user,Model model,HttpSession session) {
+	public String userlogin(UserInfo user,Model model,HttpSession session) throws  Exception{
 		
 		UserInfo userInfo = userservice.isLogin(user);
 		if(userInfo!=null) {
+			InetAddress address = InetAddress.getLocalHost();
+			String ipstr = "端口号"+address.getHostAddress()+",ip:"+ip.getPort();
+
+			userInfo.setUserMark(session.getId());
+
+			userInfo.setUserPhone(ipstr);
 			//需要把当前登录用户存到session中
 			session.setAttribute("userinfo", userInfo);
 			
@@ -74,7 +86,6 @@ public class BackIndexController {
 			model.addAttribute("info", "账号或密码错误!");
 			return "back/login";
 		}
-		
 	}
 	
 }
