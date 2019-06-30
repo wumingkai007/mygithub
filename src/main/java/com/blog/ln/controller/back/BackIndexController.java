@@ -68,12 +68,12 @@ public class BackIndexController {
 		
 		UserInfo userInfo = userservice.isLogin(user);
 		if(userInfo!=null) {
-			InetAddress address = InetAddress.getLocalHost();
-			String ipstr = "端口号"+address.getHostAddress()+",ip:"+ip.getPort();
+			//InetAddress address = InetAddress.getLocalHost();
+			//String ipstr = "端口号"+address.getHostAddress()+",ip:"+ip.getPort();
 
 			userInfo.setUserMark(session.getId());
 
-			userInfo.setUserPhone(ipstr);
+			//userInfo.setUserPhone(ipstr);
 			//需要把当前登录用户存到session中
 			session.setAttribute("userinfo", userInfo);
 			

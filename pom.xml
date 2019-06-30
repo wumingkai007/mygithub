@@ -6,7 +6,7 @@
 	<groupId>com.blog</groupId>
 	<artifactId>myblog</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>myblog</name>
 	<description>Demo project for Spring Boot</description>
@@ -36,6 +36,17 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
  		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -71,6 +82,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
 		</dependency>
+
+		<!--打包的时候可以不用包进去，别的设施会提供。事实上该依赖理论上可以参与编译，测试，运行等周期。     相当于compile，但是打包阶段做了exclude操作-->
+		<!--<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>-->
+
 	</dependencies>
 
 	<build>
@@ -89,7 +108,13 @@
 	                  <overwrite>true</overwrite> 
                    </configuration>
   			</plugin>
-			
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<finalName>myblog-8080</finalName><!-- 打包后的war名称-->
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
