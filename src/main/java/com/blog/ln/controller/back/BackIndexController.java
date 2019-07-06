@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.blog.ln.utils.IpConfiguration;
+import com.blog.ln.utils.TestOneBeam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,15 +69,11 @@ public class BackIndexController {
 		
 		UserInfo userInfo = userservice.isLogin(user);
 		if(userInfo!=null) {
-			//InetAddress address = InetAddress.getLocalHost();
-			//String ipstr = "端口号"+address.getHostAddress()+",ip:"+ip.getPort();
-
 			userInfo.setUserMark(session.getId());
 
 			//userInfo.setUserPhone(ipstr);
 			//需要把当前登录用户存到session中
 			session.setAttribute("userinfo", userInfo);
-			
 			//获取登录时间
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

@@ -2,13 +2,18 @@ package com.blog.ln.bean;
 
 import com.blog.ln.utils.BaseBean;
 
+import java.io.Serializable;
+
 /**
  * 用户管理的实体类
  * @author Administrator
  *
  */
-public class UserInfo extends BaseBean{
-	
+public class UserInfo extends BaseBean implements Serializable {
+
+
+    private static final long serialVersionUID = 1L;
+
     private Integer userId;
 
     private String userName;
